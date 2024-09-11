@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+  <h1>All courses is here:</h1>
+  <ul>
+    {% for course in courses %}
+    <li><a href='{% url "training_site_app:courses_detail_read" pk=course.pk %}'>{{ course.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href='{% url "training_site_app:courses_create" %}'>Добавить</a>
+{% endblock %}

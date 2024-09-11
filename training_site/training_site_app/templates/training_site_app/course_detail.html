@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+  <h1>Ingo about current course:</h1>
+  <h3>Id: {{ course.id }}</h3>
+  <h3>Name: {{ course.name }}</h3>
+  <h3>Description: {{ course.description }}</h3>
+  <a href="{% url 'training_site_app:courses_delete' pk=course.pk %}"> Удалить</a>
+  <a href="{% url 'training_site_app:courses_update' pk=course.pk %}"> Изменить</a>
+{% endblock %}
