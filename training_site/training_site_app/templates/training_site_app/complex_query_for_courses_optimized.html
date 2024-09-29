@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1>Доступные курсы:</h1>
+{% for course in courses %}
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}}</h2>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Студентов на курсе: {{ course.students_count }}</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Преподавателей на курсе: {{ course.educators_count }}</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Всего человек на курсе : {{ course.summary }}</h3>
+{% endfor %}
+{% endblock %}

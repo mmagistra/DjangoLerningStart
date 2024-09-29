@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1 style="text-align: center">Menu</h1>
+<h2>- First homework (<a href="{% url 'training_site_app:courses_read' %}">CRUD</a> for model)</h2>
+
+<h2>- Second homework (Optimization of queries)</h2>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;Query 1: For each student, display all of his teachers, from all of his courses</h3>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_1_slow' %}">Slow</a></h4>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_1_optimized' %}">Optimized</a></h4>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;Query 2: For each course you need to calculate the number of: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. all students,
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. all teachers and <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. their total value</h3>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_2_slow' %}">Slow</a></h4>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_2_optimized' %}">Optimized</a></h4>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;Query 3: For each course, display all students, provided that the number of
+  lessons in this course is >= 2, and at least 1 lesson contains “Introduction” in the name (case-sensitive)</h3>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_3_slow' %}">Slow</a></h4>
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href="{% url 'training_site_app:students_query_3_optimized' %}">Optimized</a></h4>
+{% endblock %}

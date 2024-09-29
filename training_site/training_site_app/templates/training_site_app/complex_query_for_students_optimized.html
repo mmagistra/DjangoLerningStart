@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1>Вот все студенты:</h1>
+<h2>---- А вот все их преподаватели со всех их курсов</h2>
+<h2>__________________________________________</h2>
+{% for record in records %}
+<h3>{{ record.user }}</h3>
+{% for educator in record.educators %}
+<h5>  ----  {{ educator }}</h5>
+{% endfor %}
+{% endfor %}
+{% endblock %}

@@ -25,7 +25,8 @@ class Lesson(models.Model):
     text = models.TextField()  # lesson's text
     course = models.ForeignKey(
         to=Course,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='lessons',
     )  # from which course this lesson
 
     def __str__(self):
