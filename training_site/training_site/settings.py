@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
-    # None
+    'django_celery_results',
+    
     # my
     'training_site_app.apps.TrainingSiteAppConfig'
 ]
@@ -79,6 +80,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'training_site.wsgi.application'
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / 'app-message'
+
+# Celery
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672/"
+CELERY_RESULT_BACKEND = "django-db"
+# CELERY_RESULT_BACKEND = 'rpc://'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

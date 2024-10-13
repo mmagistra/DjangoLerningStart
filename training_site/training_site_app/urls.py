@@ -11,7 +11,7 @@ from training_site_app.views import (
     ComplexQueryForStudentsOptimized,
     ComplexQueryForCoursesSlow,
     ComplexQueryForCoursesOptimized,
-    ComplexQueryForLessonsSlow, ComplexQueryForLessonsOptimized, Menu,
+    ComplexQueryForLessonsSlow, ComplexQueryForLessonsOptimized, Menu, Contacts, send_email, EmailSent,
 )
 
 
@@ -30,4 +30,7 @@ urlpatterns = [
     path('queries/2/optimized', ComplexQueryForCoursesOptimized.as_view(), name='students_query_2_optimized'),
     path('queries/3/slow', ComplexQueryForLessonsSlow.as_view(), name='students_query_3_slow'),
     path('queries/3/optimized', ComplexQueryForLessonsOptimized.as_view(), name='students_query_3_optimized'),
+    path('contacts/', Contacts.as_view(), name='contacts'),
+    path('sent_email/', send_email, name='send_email'),
+    path('email_sent/', EmailSent.as_view(), name='email_sent')
 ]

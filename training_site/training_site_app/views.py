@@ -1,10 +1,14 @@
+from time import sleep
+
 from django.db.models import Count, QuerySet, Q
+from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
-from training_site_app.forms import CreateForm
+from training_site_app.forms import CreateForm, UserEmailForm
 from training_site_app.models import Course, Lesson, Student, Educator
+from training_site_app.tasks import send_contact_with_me_email
 
 
 class Menu(TemplateView):
@@ -181,3 +185,26 @@ class ComplexQueryForLessonsOptimized(TemplateView):
             })
 
         return context
+
+
+class Contacts(TemplateView):
+    template_name = 'training_site_app/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = UserEmailForm
+
+        return context
+
+
+def send_email(request: HttpRequest):
+    form = UserEmailForm(request.POST)
+    if form.is_valid():
+        user_email = form.cleaned_data['user_email']
+        # set into query
+        send_contact_with_me_email.delay(user_email)
+        return HttpResponseRedirect(reverse_lazy("training_site_app:email_sent"))
+
+
+class EmailSent(TemplateView):
+    template_name = 'training_site_app/email_sent.html'

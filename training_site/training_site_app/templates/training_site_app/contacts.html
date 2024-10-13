@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+<form action="{% url 'training_site_app:send_email' %}" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Contact with me later</button>
+</form>
+{% endblock %}
