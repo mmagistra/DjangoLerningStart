@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "training-site"
+version = "0.1.0"
+description = ""
+authors = ["domini <mikalmet@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django-debug-toolbar = "^4.4.6"
+django = "^5.1.2"
+celery = "^5.4.0"
+django-celery-results = "^2.5.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
