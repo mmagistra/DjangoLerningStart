@@ -23,6 +23,7 @@ from training_site import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('training_site_app.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if not settings.TESTING:

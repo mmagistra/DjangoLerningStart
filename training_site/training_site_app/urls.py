@@ -1,5 +1,7 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
 
 from training_site_app.views import (
     CoursesRead,
@@ -11,11 +13,27 @@ from training_site_app.views import (
     ComplexQueryForStudentsOptimized,
     ComplexQueryForCoursesSlow,
     ComplexQueryForCoursesOptimized,
-    ComplexQueryForLessonsSlow, ComplexQueryForLessonsOptimized, Menu, Contacts, send_email, EmailSent,
+    ComplexQueryForLessonsSlow,
+    ComplexQueryForLessonsOptimized,
+    Menu,
+    Contacts,
+    send_email,
+    EmailSent,
+    CourseViewSet,
+    LessonViewSet,
+    EducatorViewSet,
+    StudentViewSet, UserViewSet, TokenRecreate,
 )
 
 
 app_name = 'training_site_app'
+
+router = DefaultRouter()
+router.register('courses', CourseViewSet, 'course')
+router.register('lessons', LessonViewSet, 'lesson')
+router.register('educators', EducatorViewSet, 'educator')
+router.register('students', StudentViewSet, 'student')
+router.register('user', UserViewSet, 'user')
 
 urlpatterns = [
     path('', Menu.as_view(), name='menu'),
@@ -32,5 +50,9 @@ urlpatterns = [
     path('queries/3/optimized', ComplexQueryForLessonsOptimized.as_view(), name='students_query_3_optimized'),
     path('contacts/', Contacts.as_view(), name='contacts'),
     path('sent_email/', send_email, name='send_email'),
-    path('email_sent/', EmailSent.as_view(), name='email_sent')
+    path('email_sent/', EmailSent.as_view(), name='email_sent'),
+    # rest
+    path('rest/', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('token-recreate/', TokenRecreate.as_view(), name='token_recreate')
 ]

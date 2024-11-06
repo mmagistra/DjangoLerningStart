@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     'django_celery_results',
-    
+    'rest_framework',
+    'rest_framework.authtoken',
     # my
     'training_site_app.apps.TrainingSiteAppConfig'
 ]
@@ -153,3 +154,14 @@ if not TESTING:
         'debug_toolbar.middleware.DebugToolbarMiddleware',
         *MIDDLEWARE,
     ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}

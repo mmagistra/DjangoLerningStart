@@ -1,14 +1,27 @@
 from time import sleep
 
+from django.contrib.auth import get_user_model
 from django.db.models import Count, QuerySet, Q
 from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from rest_framework import authentication
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from training_site_app.forms import CreateForm, UserEmailForm
 from training_site_app.models import Course, Lesson, Student, Educator
+from training_site_app.serializers import CourseSerializer, LessonSerializer, EducatorSerializer, StudentSerializer, \
+    UserSerializer, TokenSerializer
 from training_site_app.tasks import send_contact_with_me_email
+
+
+UserModel = get_user_model()
 
 
 class Menu(TemplateView):
@@ -208,3 +221,46 @@ def send_email(request: HttpRequest):
 
 class EmailSent(TemplateView):
     template_name = 'training_site_app/email_sent.html'
+
+
+# Rest api
+class CourseViewSet(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = [DjangoModelPermissions]
+
+
+class LessonViewSet(ModelViewSet):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [DjangoModelPermissions]
+
+
+class EducatorViewSet(ModelViewSet):
+    queryset = Educator.objects.all()
+    serializer_class = EducatorSerializer
+    permission_classes = [DjangoModelPermissions]
+
+
+class StudentViewSet(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    permission_classes = [DjangoModelPermissions]
+
+
+class UserViewSet(ModelViewSet):
+    queryset = UserModel.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [DjangoModelPermissions]
+    http_method_names = ['get']
+
+
+class TokenRecreate(APIView):
+    def post(self, request):
+        old_token = Token.objects.get(user=request.user)
+        old_token.delete()
+        new_token = Token.objects.create(user=request.user)
+        serialized_token = TokenSerializer(instance=new_token)
+        return Response(serialized_token.data, status=HTTP_200_OK)
+
+
