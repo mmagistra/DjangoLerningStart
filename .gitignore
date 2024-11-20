@@ -399,3 +399,4 @@ cython_debug/
 
 /local_debug/
 .idea
+/training_site/frontend/node_modules/

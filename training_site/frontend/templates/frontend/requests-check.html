@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1>Test fetch and axios requests</h1>
+
+<h3>Fetch request for courses info</h3>
+<ul id="courses_placeholder"></ul>
+
+<h3>Axios request for students info</h3>
+<ul id="students_placeholder"></ul>
+
+<script src="{% static 'frontend/fetch_courses.js' %}"></script>
+<script src="{% static 'frontend/axios_students.js' %}"></script>
+{% endblock %}

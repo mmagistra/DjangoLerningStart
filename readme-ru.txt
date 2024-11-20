@@ -30,3 +30,10 @@ curl -X GET http://127.0.0.1:8000/rest/students/ -H 'Authorization: Token <CURRE
 Students - просмотр студентов, преподавателей, курсов и лекций
 Educators - CRUD для студентов, преподавателей, курсов и лекций
 
+---Fetch and axios---
+
+Добавлена пустая страница для тестирования фронта.
+http://localhost:8000/frontend-check/test-page/
+
+Добавлена страница с асинхронным запросом от fetch & axios с последующим выводом на страницу с минимальной разметкой.
+http://localhost:8000/frontend-check/requests-check/
